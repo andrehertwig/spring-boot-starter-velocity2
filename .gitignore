@@ -1,0 +1,12 @@
+target
+.idea
+.apt_generated
+*.iml
+*.project
+*.classpath
+.settings
+*.fbExcludeFilterFile
+*.factorypath
+*.log
+/bin
+*.versionsBackup

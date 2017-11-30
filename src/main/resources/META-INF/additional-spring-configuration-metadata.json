@@ -1,0 +1,25 @@
+{
+"groups": [],
+"properties": [
+  {
+    "name": "velocity.enabled",
+    "type": "java.lang.Boolean",
+    "description": "if auto configuration is enabled",
+    "defaultValue": "true"
+  },{
+    "name": "velocity.properties-config-location",
+    "type": "java.lang.String",
+    "description": "Optional: a different resource location for velocity internal properties. (http://velocity.apache.org/engine/2.0/configuration.html)",
+    "defaultValue": "classpath:/org/apache/velocity/runtime/defaults/velocity.properties"
+  },{
+    "name": "velocity.properties",
+    "type": "java.util.Map",
+    "description": "Optional: option to manage velocity internal properties via spring application properties. (http://velocity.apache.org/engine/2.0/configuration.html)",
+    "defaultValue": ""
+  },{
+    "name": "velocity.override-config-location-properties",
+    "type": "java.lang.Boolean",
+    "description": "If true, the properties from spring application will override the esisting quartz properties from velocity.propertiesConfigLocation",
+    "defaultValue": "true"
+  }
+]}
