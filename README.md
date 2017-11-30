@@ -4,6 +4,7 @@
 
 This starter just appends the [Velocity Engine 2.0](http://velocity.apache.org/engine/2.0/) to Spring context and you can configure it via spring properties.
 Because Velocity-Tools is still in version 2.0 and incompatible to Velocity-Template-Engine 2.0 there is no implmentation for tools.
+Furthermore this starter does not provide any ViewResolver.
 
 [![Maven Central](https://img.shields.io/maven-central/v/de.chandre.quartz/spring-boot-starter-velocity2.svg)](https://mvnrepository.com/artifact/de.chandre.velocity2)
 [![GitHub issues](https://img.shields.io/github/issues/andrehertwig/spring-boot-starter-velocity2.svg)](https://github.com/andrehertwig/spring-boot-starter-velocity2/issues)
@@ -69,9 +70,9 @@ public class VelocityConfig
 		return new Velocity2PropertiesOverrideHook() {
 
 			@Override
-			public Properties override(Properties quartzProperties) {
-				quartzProperties.put("myKey", "myValue");
-				return quartzProperties;
+			public Properties override(Properties velocityProperties) {
+				velocityProperties.put("myKey", "myValue");
+				return velocityProperties;
 			}
 		};
 	}
