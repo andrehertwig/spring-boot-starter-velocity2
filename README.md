@@ -2,8 +2,8 @@
 
 > Just a Spring-Boot starter for Velocity 2.0 Template Engine.
 
-This starter just appends the [Velocity Engine 2.0] (http://velocity.apache.org/engine/2.0/) to Spring Context and you can configure it via spring properties.
-Because Velocity Tools is still version 2.0 and incompatible to Velocity 2.0 Template Engine there is no implmentation for tools.
+This starter just appends the [Velocity Engine 2.0](http://velocity.apache.org/engine/2.0/) to Spring context and you can configure it via spring properties.
+Because Velocity-Tools is still in version 2.0 and incompatible to Velocity-Template-Engine 2.0 there is no implmentation for tools.
 
 [![Maven Central](https://img.shields.io/maven-central/v/de.chandre.quartz/spring-boot-starter-velocity2.svg)](https://mvnrepository.com/artifact/de.chandre.velocity2)
 [![GitHub issues](https://img.shields.io/github/issues/andrehertwig/spring-boot-starter-velocity2.svg)](https://github.com/andrehertwig/spring-boot-starter-velocity2/issues)
