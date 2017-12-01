@@ -6,7 +6,7 @@ This starter just appends the [Velocity Engine 2.0](http://velocity.apache.org/e
 Because Velocity-Tools is still in version 2.0 and incompatible to Velocity-Template-Engine 2.0 there is no implmentation for tools.
 Furthermore this starter does not provide any ViewResolver.
 
-[![Maven Central](https://img.shields.io/maven-central/v/de.chandre.quartz/spring-boot-starter-velocity2.svg)](https://mvnrepository.com/artifact/de.chandre.velocity2)
+[![Maven Central](https://img.shields.io/maven-central/v/de.chandre.velocity2/spring-boot-starter-velocity2.svg)](https://mvnrepository.com/artifact/de.chandre.velocity2)
 [![GitHub issues](https://img.shields.io/github/issues/andrehertwig/spring-boot-starter-velocity2.svg)](https://github.com/andrehertwig/spring-boot-starter-velocity2/issues)
 [![license](https://img.shields.io/github/license/andrehertwig/spring-boot-starter-velocity2.svg)](https://github.com/andrehertwig/spring-boot-starter-velocity2/blob/develop/LICENSE)
 
