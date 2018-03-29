@@ -71,7 +71,7 @@ public class VelocityConfig
 
 			@Override
 			public Properties override(Properties velocityProperties) {
-				velocityProperties.put("resource.manager.instance", rcMgr);
+				velocityProperties.put(RuntimeConstants.RESOURCE_MANAGER_INSTANCE, rcMgr);
 				return velocityProperties;
 			}
 		};
