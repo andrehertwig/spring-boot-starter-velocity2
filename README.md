@@ -32,7 +32,7 @@ Unit-Tested with Spring Boot 1.5.6
 <dependency>
 	<groupId>de.chandre.velocity2</groupId>
 	<artifactId>spring-boot-starter-velocity2</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 </dependency>
 	
 ```
@@ -66,12 +66,12 @@ public class VelocityConfig
 	private static final Logger LOGGER = LogManager.getFormatterLogger(VelocityConfig.class);
 	
 	@Bean
-	public Velocity2PropertiesOverrideHook velocity2PropertiesOverrideHook() {
+	public Velocity2PropertiesOverrideHook velocity2PropertiesOverrideHook(MyResourceManager rcMgr) {
 		return new Velocity2PropertiesOverrideHook() {
 
 			@Override
 			public Properties override(Properties velocityProperties) {
-				velocityProperties.put("myKey", "myValue");
+				velocityProperties.put("resource.manager.instance", rcMgr);
 				return velocityProperties;
 			}
 		};
