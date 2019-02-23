@@ -3,10 +3,15 @@ package de.chandre.velocity2.spring;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.tools.ToolManager;
+import org.apache.velocity.tools.config.ConfigurationUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,7 +35,7 @@ public class Velocity2AutoConfiguration {
 	
 	public static final String VELOCITY_PROPERTIES_BEAN_NAME = "velocityProperties";
 	public static final String VELOCITY_ENGINE_BEAN_NAME = "autoVelocityEngine";
-//	public static final String VELOCITY_TOOLBOX_BEAN_NAME = "autoVelocityToolbox";
+	public static final String VELOCITY_TOOLBOX_BEAN_NAME = "autoVelocityToolbox";
 	
 
 	@Configuration
@@ -108,17 +113,18 @@ public class Velocity2AutoConfiguration {
 			try {
 				return applicationContext.getBean(Velocity2PropertiesOverrideHook.class);
 			} catch (Exception e) {
-				LOGGER.info("no QuartzPropertiesOverrideHook configured");
+				LOGGER.info("no Velocity2PropertiesOverrideHook configured");
 				LOGGER.trace(e.getMessage(), e);
 			}
 			return null;
 		}
 	}
 	
-	/*
+	
 	@Bean(name = VELOCITY_TOOLBOX_BEAN_NAME)
 	@ConditionalOnMissingBean(name = VELOCITY_TOOLBOX_BEAN_NAME)
-	public ToolContext autoVelocityToolbox(Velocity2Properties properties,
+	@ConditionalOnBean(name= {VELOCITY_ENGINE_BEAN_NAME})
+	public ToolManager autoVelocityToolbox(Velocity2Properties properties,
 			@Qualifier(VELOCITY_ENGINE_BEAN_NAME) VelocityEngine velocityEngine) {
 		
 		if (!properties.getToolbox().isEnabled()) {
@@ -131,13 +137,10 @@ public class Velocity2AutoConfiguration {
 			LOGGER.info("configuring velocity toolbox to location: " + properties.getToolbox().getConfigLocation());
 			tm.configure(properties.getToolbox().getConfigLocation());
 		} else {
-			LOGGER.info("auto configuringing velocity toolbox");
-			tm.autoConfigure(true);
+			LOGGER.info("auto configuringing default velocity toolbox");
+			tm.configure(ConfigurationUtils.getDefaultTools());
 		}
-		return tm.createContext();
+		return tm;
 	}
-	*/
-	
-	
 	
 }
