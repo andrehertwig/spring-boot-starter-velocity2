@@ -22,8 +22,9 @@ This is just a spare-time project. The usage of this tool (especially in product
 ## Requirements, Dependencies
 * spring-boot
 * apache velocity 2.0
+* apache velocity tools 3.0 (optional)
 
-Unit-Tested with Spring Boot 1.5.6
+Unit-Tested with Spring Boot 1.5.6, 1.5.19
 
 ## Usage
 
@@ -32,7 +33,7 @@ Unit-Tested with Spring Boot 1.5.6
 <dependency>
 	<groupId>de.chandre.velocity2</groupId>
 	<artifactId>spring-boot-starter-velocity2</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 </dependency>
 	
 ```
