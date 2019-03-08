@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.tools.ToolManager;
 import org.apache.velocity.tools.config.ConfigurationUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -120,27 +119,33 @@ public class Velocity2AutoConfiguration {
 		}
 	}
 	
-	
-	@Bean(name = VELOCITY_TOOLBOX_BEAN_NAME)
+	@Configuration
+	@ConditionalOnProperty(prefix = Velocity2Properties.PREFIX, name = "toolbox.enabled", havingValue="true", matchIfMissing = true)
 	@ConditionalOnMissingBean(name = VELOCITY_TOOLBOX_BEAN_NAME)
-	@ConditionalOnBean(name= {VELOCITY_ENGINE_BEAN_NAME})
-	public ToolManager autoVelocityToolbox(Velocity2Properties properties,
-			@Qualifier(VELOCITY_ENGINE_BEAN_NAME) VelocityEngine velocityEngine) {
+	@ConditionalOnClass(name={"org.apache.velocity.tools.ToolManager"})
+	protected static class VelocityToolsConfiguration {
 		
-		if (!properties.getToolbox().isEnabled()) {
-			return null;
+		@Bean(name = VELOCITY_TOOLBOX_BEAN_NAME)
+		@ConditionalOnMissingBean(name = VELOCITY_TOOLBOX_BEAN_NAME)
+		@ConditionalOnBean(name= {VELOCITY_ENGINE_BEAN_NAME})
+		public org.apache.velocity.tools.ToolManager autoVelocityToolbox(Velocity2Properties properties,
+				@Qualifier(VELOCITY_ENGINE_BEAN_NAME) VelocityEngine velocityEngine) {
+			
+			if (!properties.getToolbox().isEnabled()) {
+				return null;
+			}
+			
+			org.apache.velocity.tools.ToolManager tm = new org.apache.velocity.tools.ToolManager(false, false);
+			tm.setVelocityEngine(velocityEngine);
+			if (StringUtils.isNoneBlank(properties.getToolbox().getConfigLocation())) {
+				LOGGER.info("configuring velocity toolbox to location: " + properties.getToolbox().getConfigLocation());
+				tm.configure(properties.getToolbox().getConfigLocation());
+			} else {
+				LOGGER.info("auto configuringing default velocity toolbox");
+				tm.configure(ConfigurationUtils.getDefaultTools());
+			}
+			return tm;
 		}
-		
-		ToolManager tm = new ToolManager(false, false);
-		tm.setVelocityEngine(velocityEngine);
-		if (StringUtils.isNoneBlank(properties.getToolbox().getConfigLocation())) {
-			LOGGER.info("configuring velocity toolbox to location: " + properties.getToolbox().getConfigLocation());
-			tm.configure(properties.getToolbox().getConfigLocation());
-		} else {
-			LOGGER.info("auto configuringing default velocity toolbox");
-			tm.configure(ConfigurationUtils.getDefaultTools());
-		}
-		return tm;
 	}
 	
 }
